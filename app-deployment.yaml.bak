@@ -9,9 +9,6 @@ metadata:
     io.kompose.service: app
   name: app
 spec:
-  selector:
-    matchLabels:
-      io.kompose.service: app
   replicas: 1
   strategy:
     type: Recreate
