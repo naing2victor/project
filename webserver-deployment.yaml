@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.cmd: kompose convert
     kompose.version: 1.19.0 (f63a961c)
   creationTimestamp: null
   labels:
@@ -13,12 +13,11 @@ spec:
     matchLabels:
       io.kompose.service: webserver
   replicas: 1
-  strategy:
-    type: Recreate
+  strategy: {}
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.cmd: kompose convert
         kompose.version: 1.19.0 (f63a961c)
       creationTimestamp: null
       labels:
@@ -28,21 +27,8 @@ spec:
       - image: nginx:alpine
         name: webserver
         ports:
-        - containerPort: 80
-        - containerPort: 443
+        - containerPort: 8080
         resources: {}
         tty: true
-        volumeMounts:
-        - mountPath: /var/www
-          name: webserver-claim0
-        - mountPath: /etc/nginx/conf.d/
-          name: webserver-claim1
       restartPolicy: Always
-      volumes:
-      - name: webserver-claim0
-        persistentVolumeClaim:
-          claimName: webserver-claim0
-      - name: webserver-claim1
-        persistentVolumeClaim:
-          claimName: webserver-claim1
 status: {}

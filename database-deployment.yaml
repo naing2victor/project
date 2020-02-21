@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.cmd: kompose convert
     kompose.version: 1.19.0 (f63a961c)
   creationTimestamp: null
   labels:
@@ -13,12 +13,11 @@ spec:
     matchLabels:
       io.kompose.service: database
   replicas: 1
-  strategy:
-    type: Recreate
+  strategy: {}
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.cmd: kompose convert
         kompose.version: 1.19.0 (f63a961c)
       creationTimestamp: null
       labels:
@@ -28,8 +27,12 @@ spec:
       - env:
         - name: MYSQL_DATABASE
           value: laravel
+        - name: MYSQL_PASSWORD
+          value: laravel
         - name: MYSQL_ROOT_PASSWORD
           value: root
+        - name: MYSQL_USERNAME
+          value: laravel
         - name: SERVICE_NAME
           value: mysql
         - name: SERVICE_TAGS
@@ -40,17 +43,5 @@ spec:
         - containerPort: 3306
         resources: {}
         tty: true
-        volumeMounts:
-        - mountPath: /var/lib/mysql/
-          name: dbdata
-        - mountPath: /etc/mysql/my.cnf
-          name: database-claim1
       restartPolicy: Always
-      volumes:
-      - name: dbdata
-        persistentVolumeClaim:
-          claimName: dbdata
-      - name: database-claim1
-        persistentVolumeClaim:
-          claimName: database-claim1
 status: {}
