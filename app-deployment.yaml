@@ -13,7 +13,8 @@ spec:
     matchLabels:
       io.kompose.service: app
   replicas: 1
-  strategy: {}
+  strategy:
+    type: Recreate
   template:
     metadata:
       annotations:
@@ -43,12 +44,25 @@ spec:
           value: app
         - name: SERVICE_TAGS
           value: dev
+        ports:
+        - containerPort: 80
+          protocol: TCP
         image: naing2victor/php:7.2
         name: app
-        ports:
-        - containerPort: 8080
         resources: {}
         tty: true
+        volumeMounts:
+        - mountPath: /var/www
+          name: app-claim0
+        - mountPath: /usr/local/etc/php/conf.d/local.ini
+          name: app-claim1
         workingDir: /var/www
       restartPolicy: Always
+      volumes:
+      - name: app-claim0
+        persistentVolumeClaim:
+          claimName: app-claim0
+      - name: app-claim1
+        persistentVolumeClaim:
+          claimName: app-claim1
 status: {}

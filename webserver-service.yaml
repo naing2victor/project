@@ -9,11 +9,13 @@ metadata:
     io.kompose.service: webserver
   name: webserver
 spec:
-  ports:
-  - name: "80"
-    port: 80
-    targetPort: 8080
   selector:
     io.kompose.service: webserver
+  type: NodePort
+  ports:
+  - name: webserver
+    port: 80
+    targetPort: 80
+    protocol: TCP
 status:
   loadBalancer: {}

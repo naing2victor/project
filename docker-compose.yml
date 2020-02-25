@@ -14,9 +14,10 @@ services:
       APP_NAME: Laravel
       APP_KEY: base64:xBSpqMa3n6pzvryc+lyYO0zYhFsYFp7GXQZ3L3ewloI=
     working_dir: /var/www
-    ports:
-      - "80:8080"
-        
+    volumes:
+      - ./:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+ 
   #Nginx Service
   webserver:
     image: nginx:alpine
@@ -24,8 +25,11 @@ services:
     restart: always
     tty: true
     ports:
-      - "80:8080"
-        
+      - "80:80"
+    volumes:
+      - ./:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+ 
   #MySQL Service
   database:
     image: mysql:5.7
@@ -41,3 +45,11 @@ services:
       MYSQL_PASSWORD: "laravel"
     ports:
       - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql/
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+
+#Volumes
+volumes:
+  dbdata:
+    driver: local
