@@ -53,7 +53,7 @@ spec:
               key: DB_ROOT_PASSWORD
         - name: SERVICE_NAME
           value: database
-        - name: SERVICE_TAGS
+        - name: SERVICE_TAG
           value: dev
         image: mysql:5.7
         name: database

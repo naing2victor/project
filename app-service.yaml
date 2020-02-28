@@ -13,10 +13,10 @@ spec:
   clusterIP: 10.108.201.242
   externalTrafficPolicy: Cluster
   ports:
-  - nodePort: 31206 
-    port: 9000
+  - nodePort: 32101
+    port: 80
     protocol: TCP
-    targetPort: 80
+    targetPort: 9000
   selector:
     io.kompose.service: app
   sessionAffinity: None

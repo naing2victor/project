@@ -27,7 +27,6 @@ spec:
       containers:
       - name: app
         image: naing2victor/app:2.0
-        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9000
           protocol: TCP
@@ -37,62 +36,45 @@ spec:
         - name: pvc
           mountPath: /usr/local/etc/php/conf.d/local.ini
         env:
-        - name: APP_DEBUG
-          valueFrom:
-            configMapKeyRef:
-              key: APP_DEBUG
-              name: app-env
-        - name: APP_ENV
-          valueFrom:
-            configMapKeyRef:
-              key: APP_ENV
-              name: app-env
-        - name: APP_KEY
-          valueFrom:
-            configMapKeyRef:
-              key: APP_KEY
-              name: app-env
-        - name: APP_NAME
-          valueFrom:
-            configMapKeyRef:
-              key: APP_NAME
-              name: app-env
         - name: DB_CONNECTION
           valueFrom:
             configMapKeyRef:
               key: DB_CONNECTION
-              name: app-env
-        - name: DB_DATABASE
-          valueFrom:
-            configMapKeyRef:
-              key: DB_DATABASE
-              name: app-env
+              name: database-env
         - name: DB_HOST
           valueFrom:
             configMapKeyRef:
               key: DB_HOST
-              name: app-env
-        - name: DB_PASSWORD
+              name: database-env
+        - name: DB_DATABASE
           valueFrom:
             configMapKeyRef:
-              key: DB_PASSWORD
-              name: app-env
+              key: DB_DATABASE
+              name: database-env
         - name: DB_PORT
           valueFrom:
             configMapKeyRef:
               key: DB_PORT
-              name: app-env
+              name: database-env
         - name: DB_USERNAME
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               key: DB_USERNAME
-              name: app-env
+              name: database-secret
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: DB_PASSWORD
+              name: database-secret
+        - name: SERVICE_NAME
+          value: app
+        - name: SERVICE_TAG
+          value: dev
         workingDir: /var/www/
         resources: {}
         tty: true
       - name: webserver
         image: nginx:alpine
-        imagePullPolicy: IfNotPresent
         workingDir: /var/www/
         resources: {}
         tty: true
