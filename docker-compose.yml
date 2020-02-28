@@ -4,7 +4,7 @@ services:
   #PHP Service
   app:
     container_name: app
-    image: naing2victor/php:7.2
+    image: naing2victor/app:2.0
     restart: always
     env_file: .env
     tty: true
@@ -37,12 +37,12 @@ services:
     restart: always
     tty: true
     environment:
-      SERVICE_TAGS: "dev"
-      SERVICE_NAME: "mysql"
-      MYSQL_DATABASE: "laravel"
-      MYSQL_ROOT_PASSWORD: "root"
-      MYSQL_USERNAME: "laravel"
-      MYSQL_PASSWORD: "laravel"
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USERNAME: laraveluser
+      MYSQL_PASSWORD: laraveluser
     ports:
       - "3306:3306"
     volumes:

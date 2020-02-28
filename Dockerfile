@@ -45,6 +45,9 @@ COPY --chown=www:www . /var/www/
 # Change current user to www
 USER www
 
+# Php artisan migrate
+RUN php artisan migrate
+
 # Expose port 80 and start php-fpm server
 EXPOSE 80
 CMD ["php-fpm"]
