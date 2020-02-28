@@ -9,6 +9,9 @@ metadata:
     io.kompose.service: database
   name: database
 spec: 
+  selector:
+    matchLabels:
+      io.kompose.service: database
   replicas: 1
   strategy:
     type: Recreate
@@ -44,15 +47,10 @@ spec:
         tty: true
         volumeMounts:
         - mountPath: /var/lib/mysql/
-          name: dbdata
-        - mountPath: /etc/mysql/my.cnf
-          name: database-claim1
+          name: database-claim0-persistentvolumeclaim
       restartPolicy: Always
       volumes:
-      - name: dbdata
+      - name: database-claim0-persistentvolumeclaim
         persistentVolumeClaim:
-          claimName: dbdata
-      - name: database-claim1
-        persistentVolumeClaim:
-          claimName: database-claim1
+          claimName: database-claim0
 status: {}

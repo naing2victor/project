@@ -12,7 +12,9 @@ spec:
   ports:
   - name: "database"
     port: 3306
+    targetPort: 
   selector:
     io.kompose.service: database
+  clusterIP: None
 status:
   loadBalancer: {}

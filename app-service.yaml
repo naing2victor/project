@@ -1,21 +1,25 @@
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.19.0 (f63a961c)
-  creationTimestamp: null
+  creationTimestamp: "2020-02-27T11:15:58Z"
   labels:
     io.kompose.service: app
   name: app
+  namespace: default
+  resourceVersion: "4302"
+  selfLink: /api/v1/namespaces/default/services/app
+  uid: de0d96d8-ed57-40ad-a447-ab9d8c5bd6f9
 spec:
+  clusterIP: 10.108.201.242
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 31206 
+    port: 80
+    protocol: TCP
+    targetPort: 80
   selector:
     io.kompose.service: app
+  sessionAffinity: None
   type: NodePort
-  ports:
-  - name: app
-    port: 80
-    targetPort: 80
-    protocol: TCP
 status:
   loadBalancer: {}
