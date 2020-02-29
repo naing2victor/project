@@ -9,10 +9,10 @@ metadata:
     io.kompose.service: webserver
   name: webserver
 spec:
+  replicas: 1
   selector:
     matchLabels:
       io.kompose.service: webserver
-  replicas: 1
   strategy:
     type: Recreate
   template:
@@ -29,11 +29,9 @@ spec:
         name: webserver
         ports:
         - containerPort: 80
-        volumeMounts:
-        - mountPath: /var/www
-          name: pvc
-        - mountPath: /etc/nginx/conf.d/
-          name: pvc
+       #volumeMounts:
+       #- mountPath: /var/www/
+         #name: pvc
         resources: {}
         tty: true
       restartPolicy: Always
@@ -41,4 +39,7 @@ spec:
       - name: pvc
         persistentVolumeClaim:
           claimName: pvc
+      - name: webserver-env
+        configMap:
+          name: webserver-env
 status: {}

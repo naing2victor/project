@@ -25,36 +25,11 @@ spec:
         io.kompose.service: database
     spec:
       containers:
-      - env:
-        - name: DB_DATABASE
-          valueFrom:
-            configMapKeyRef:
-              key: DB_DATABASE
-              name: database-env
-        - name: DB_PORT
-          valueFrom:
-            configMapKeyRef:
-              key: DB_PORT
-              name: database-env
-        - name: DB_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: database-secret
-              key: DB_USERNAME
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: database-secret
-              key: DB_PASSWORD
-        - name: DB_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: database-secret
-              key: DB_ROOT_PASSWORD
-        - name: SERVICE_NAME
-          value: database
-        - name: SERVICE_TAG
-          value: dev
+      - envFrom:
+        - configMapRef:
+            name: database-env
+        - secretRef:
+            name: database-secret
         image: mysql:5.7
         name: database
         ports:
@@ -64,10 +39,10 @@ spec:
         tty: true
         volumeMounts:
         - mountPath: /var/lib/mysql/
-          name: database-claim0-persistentvolumeclaim
+          name: pvc
       restartPolicy: Always
       volumes:
-      - name: database-claim0-persistentvolumeclaim
+      - name: pvc
         persistentVolumeClaim:
-          claimName: database-claim0
+          claimName: pvc
 status: {}

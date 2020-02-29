@@ -1,6 +1,6 @@
 apiVersion: v1
 data:
-  DB_CONNECTION: mysql
+  DB_CONNECTION: database
   DB_HOST: database
   DB_DATABASE: laravel
   DB_PORT: "3306"

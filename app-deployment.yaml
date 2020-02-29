@@ -9,10 +9,10 @@ metadata:
     io.kompose.service: app
   name: app
 spec:
+  replicas: 1
   selector:
     matchLabels:
       io.kompose.service: app
-  replicas: 1
   strategy:
     type: Recreate
   template:
@@ -27,49 +27,21 @@ spec:
       containers:
       - name: app
         image: naing2victor/app:2.0
-        # ports:
-        # - containerPort: 9000
-        # protocol: TCP
+        ports:
+        - containerPort: 80
+          protocol: TCP
         volumeMounts:
-        - name: pvc
-          mountPath: /var/www/
-        - name: pvc
-          mountPath: /usr/local/etc/php/conf.d/local.ini
-        env:
-        - name: DB_CONNECTION
-          valueFrom:
-            configMapKeyRef:
-              key: DB_CONNECTION
-              name: database-env
-        - name: DB_HOST
-          valueFrom:
-            configMapKeyRef:
-              key: DB_HOST
-              name: database-env
-        - name: DB_DATABASE
-          valueFrom:
-            configMapKeyRef:
-              key: DB_DATABASE
-              name: database-env
-        - name: DB_PORT
-          valueFrom:
-            configMapKeyRef:
-              key: DB_PORT
-              name: database-env
-        - name: DB_USERNAME
-          valueFrom:
-            secretKeyRef:
-              key: DB_USERNAME
-              name: database-secret
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: DB_PASSWORD
-              name: database-secret
-        - name: SERVICE_NAME
-          value: app
-        - name: SERVICE_TAG
-          value: dev
+       #- name: pvc
+         #mountPath: /var/www/
+       #- name: pvc
+         #mountPath: /usr/local/etc/php/conf.d/local.ini
+        envFrom:
+        - configMapRef:
+            name: app-env
+        - configMapRef:
+            name: database-env
+        - secretRef:
+            name: database-secret
         workingDir: /var/www/
         resources: {}
         tty: true

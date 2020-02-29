@@ -1,10 +1,12 @@
 apiVersion: v1
-data:
-  APP_NAME: Laravel
-  APP_KEY: T3qW4VqzbLVtmIckD8DkMZE9kqs+SUDI9z0MQ94vKV0=
 kind: ConfigMap
 metadata:
   creationTimestamp: null
   labels:
     io.kompose.service: app-env
   name: app-env
+data:
+  APP_NAME: Laravel
+  APP_ENV: local
+  APP_KEY: base64:T3qW4VqzbLVtmIckD8DkMZE9kqs+SUDI9z0MQ94vKV0=
+  APP_URL: 192.168.200.103
