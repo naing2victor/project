@@ -27,9 +27,9 @@ spec:
       containers:
       - name: app
         image: naing2victor/app:2.0
-        ports:
-        - containerPort: 9000
-          protocol: TCP
+        # ports:
+        # - containerPort: 9000
+        # protocol: TCP
         volumeMounts:
         - name: pvc
           mountPath: /var/www/
@@ -70,11 +70,6 @@ spec:
           value: app
         - name: SERVICE_TAG
           value: dev
-        workingDir: /var/www/
-        resources: {}
-        tty: true
-      - name: webserver
-        image: nginx:alpine
         workingDir: /var/www/
         resources: {}
         tty: true

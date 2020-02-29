@@ -6,16 +6,16 @@ metadata:
     kompose.version: 1.19.0 (f63a961c)
   creationTimestamp: null
   labels:
-    io.kompose.service: app
-  name: app
+    io.kompose.service: webserver
+  name: webserver
 spec:
   ports:
-  - nodePort: 32101
+  - nodePort: 32111
     port: 80
     protocol: TCP
     targetPort: 80
   selector:
-    io.kompose.service: app
+    io.kompose.service: webserver
   sessionAffinity: None
   type: NodePort
 status:
