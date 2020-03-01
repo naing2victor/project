@@ -31,10 +31,10 @@ spec:
         - containerPort: 80
           protocol: TCP
         volumeMounts:
-       #- name: pvc
-         #mountPath: /var/www/
-       #- name: pvc
-         #mountPath: /usr/local/etc/php/conf.d/local.ini
+        - name: pvc
+          mountPath: /var/www/
+        - name: pvc
+          mountPath: /usr/local/etc/php/conf.d/local.ini
         envFrom:
         - configMapRef:
             name: app-env
