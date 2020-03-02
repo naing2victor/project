@@ -51,7 +51,7 @@ spec:
       volumes:
 #      - name: pvc
 #        persistentVolumeClaim:
-#         claimName: pvc
+#          claimName: pvc
       - name: app-volume
         hostPath:
           path: /home/naing/project/

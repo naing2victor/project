@@ -6,6 +6,7 @@ metadata:
     io.kompose.service: pvc
   name: pvc
 spec:
+  storageClassName: vol
   accessModes:
   - ReadWriteOnce
   resources:
