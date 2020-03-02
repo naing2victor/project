@@ -31,10 +31,12 @@ spec:
         - containerPort: 80
           protocol: TCP
         volumeMounts:
-        - name: pvc
-          mountPath: /var/www/
-        - name: pvc
-          mountPath: /usr/local/etc/php/conf.d/local.ini
+#        - name: pvc
+#          mountPath: /var/www
+#        - name: pvc
+#          mountPath: /usr/local/etc/php/conf.d/local.ini
+        - name: app-volume
+          mountPath: /var/www
         envFrom:
         - configMapRef:
             name: app-env
@@ -47,7 +49,11 @@ spec:
         tty: true
       restartPolicy: Always
       volumes:
-      - name: pvc
-        persistentVolumeClaim:
-          claimName: pvc
+#      - name: pvc
+#        persistentVolumeClaim:
+#         claimName: pvc
+      - name: app-volume
+        hostPath:
+          path: /home/naing/project/
+          type: DirectoryOrCreate
 status: {}
