@@ -9,10 +9,10 @@ metadata:
     io.kompose.service: database
   name: database
 spec: 
+  replicas: 2
   selector:
     matchLabels:
       io.kompose.service: database
-  replicas: 1
   strategy:
     type: Recreate
   template:
