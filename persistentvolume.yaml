@@ -11,8 +11,8 @@ metadata:
 spec:
   storageClassName: vol
   capacity:
-	storage: 5Gi
+    storage: 5Gi
   accessModes:
-	- ReadWriteOnce
+    - ReadWriteOnce
   hostPath:
-	path: "/home/naing/project"
+    path: "/data"
