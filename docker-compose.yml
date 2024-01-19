@@ -30,7 +30,7 @@ services:
  
   #MySQL Service
   database:
-    image: mysql:5.7
+    image: mysql:8.3
     container_name: database
     restart: always
     tty: true
